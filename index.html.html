@@ -1,0 +1,2230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AnimeNest ⚡ Ultimate Anime Hub</title>
+
+<style>
+/* =========================================================
+   ANIMENEST - ULTIMATE ANIME WEBSITE
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050510;
+    color:#fff;
+    overflow-x:hidden;
+    transition:.4s;
+}
+
+body.light{
+    background:#eef0ff;
+    color:#111;
+}
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+#particles{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-1;
+}
+
+.particle{
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:#a855f7;
+    border-radius:50%;
+    box-shadow:0 0 15px #a855f7;
+    animation:float 8s infinite linear;
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(100vh) scale(.5);
+        opacity:0;
+    }
+    20%{opacity:1}
+    80%{opacity:1}
+    100%{
+        transform:translateY(-10vh) scale(1.5);
+        opacity:0;
+    }
+}
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    min-height:72px;
+    background:rgba(5,5,16,.92);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid #272044;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:12px 4%;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:900;
+    white-space:nowrap;
+    color:#fff;
+}
+
+.logo span{
+    color:#a855f7;
+    text-shadow:0 0 15px #a855f7;
+}
+
+.nav{
+    display:flex;
+    gap:5px;
+    flex:1;
+    overflow-x:auto;
+}
+
+.nav button{
+    background:none;
+    border:0;
+    color:#bdb9d2;
+    padding:11px 13px;
+    border-radius:10px;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:.25s;
+}
+
+.nav button:hover,
+.nav button.active{
+    background:linear-gradient(135deg,#7c3aed,#ec4899);
+    color:#fff;
+    box-shadow:0 0 20px #7c3aed66;
+}
+
+.search{
+    width:210px;
+    display:flex;
+    background:#111124;
+    border:1px solid #343052;
+    border-radius:30px;
+    padding:9px 14px;
+}
+
+.search input{
+    width:100%;
+    background:none;
+    border:0;
+    outline:0;
+    color:#fff;
+    margin-left:7px;
+}
+
+.icon-btn{
+    width:42px;
+    height:42px;
+    border:1px solid #393252;
+    border-radius:50%;
+    background:#111124;
+    color:#fff;
+    cursor:pointer;
+}
+
+/* =========================================================
+   PAGES
+========================================================= */
+
+.page{
+    display:none;
+    animation:pageIn .45s ease;
+}
+
+.page.active{
+    display:block;
+}
+
+@keyframes pageIn{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    min-height:620px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    padding:70px 8%;
+    overflow:hidden;
+
+    background:
+    linear-gradient(90deg,#050510 5%,rgba(5,5,16,.82),rgba(5,5,16,.25)),
+    url("https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1800&q=80");
+
+    background-size:cover;
+    background-position:center;
+}
+
+.hero:after{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+    right:-150px;
+    top:50px;
+    background:#8b5cf6;
+    filter:blur(180px);
+    opacity:.25;
+}
+
+.hero-content{
+    max-width:720px;
+    position:relative;
+    z-index:2;
+}
+
+.small-title{
+    color:#c084fc;
+    font-weight:bold;
+    letter-spacing:4px;
+    margin-bottom:15px;
+}
+
+.hero h1{
+    font-size:clamp(45px,7vw,85px);
+    line-height:.95;
+    margin-bottom:25px;
+}
+
+.gradient{
+    background:linear-gradient(90deg,#8b5cf6,#ec4899,#22d3ee);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    color:#d2cfe1;
+    font-size:19px;
+    line-height:1.7;
+    max-width:650px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:15px;
+    margin-top:30px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    border:0;
+    border-radius:12px;
+    padding:15px 25px;
+    color:#fff;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.btn:hover{
+    transform:translateY(-4px) scale(1.02);
+}
+
+.primary{
+    background:linear-gradient(135deg,#7c3aed,#ec4899);
+    box-shadow:0 0 30px #8b5cf655;
+}
+
+.secondary{
+    background:#15152a;
+    border:1px solid #403866;
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container{
+    width:92%;
+    max-width:1450px;
+    margin:auto;
+    padding:45px 0;
+}
+
+.title{
+    font-size:32px;
+    margin-bottom:25px;
+}
+
+.title span{
+    color:#a855f7;
+}
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-top:-50px;
+    position:relative;
+    z-index:4;
+}
+
+.stat{
+    background:rgba(16,16,34,.9);
+    border:1px solid #312950;
+    padding:24px;
+    border-radius:16px;
+    text-align:center;
+    backdrop-filter:blur(10px);
+}
+
+.stat h2{
+    color:#c084fc;
+    font-size:32px;
+}
+
+.stat p{
+    color:#9691aa;
+    margin-top:5px;
+}
+
+/* =========================================================
+   GENRES
+========================================================= */
+
+.genre-list{
+    display:flex;
+    gap:10px;
+    overflow:auto;
+    padding-bottom:15px;
+}
+
+.genre-list button{
+    flex-shrink:0;
+    background:#111124;
+    color:#ccc6df;
+    border:1px solid #332b4d;
+    padding:11px 18px;
+    border-radius:25px;
+    cursor:pointer;
+}
+
+.genre-list button:hover,
+.genre-list button.active{
+    background:#7c3aed;
+    color:#fff;
+    box-shadow:0 0 20px #7c3aed66;
+}
+
+/* =========================================================
+   ANIME CARDS
+========================================================= */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(190px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:#0e0e20;
+    border:1px solid #292442;
+    border-radius:16px;
+    overflow:hidden;
+    transition:.3s;
+    position:relative;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    border-color:#a855f7;
+    box-shadow:
+        0 10px 40px #000,
+        0 0 25px #8b5cf633;
+}
+
+.card img{
+    width:100%;
+    height:275px;
+    object-fit:cover;
+    display:block;
+}
+
+.card-body{
+    padding:15px;
+}
+
+.card h3{
+    margin-bottom:8px;
+}
+
+.rating{
+    color:#facc15;
+    margin-bottom:8px;
+}
+
+.meta{
+    color:#8f8aa5;
+    font-size:13px;
+    margin-bottom:10px;
+}
+
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:5px;
+}
+
+.tag{
+    padding:4px 8px;
+    border-radius:8px;
+    background:#25203a;
+    color:#c4b5fd;
+    font-size:11px;
+}
+
+.card-buttons{
+    display:flex;
+    gap:7px;
+    margin-top:12px;
+}
+
+.card-buttons button{
+    flex:1;
+    border:0;
+    padding:9px;
+    border-radius:8px;
+    cursor:pointer;
+    background:#29233e;
+    color:#fff;
+}
+
+.card-buttons button:hover{
+    background:#7c3aed;
+}
+
+/* =========================================================
+   TRENDING
+========================================================= */
+
+.trending{
+    display:flex;
+    gap:18px;
+    overflow:auto;
+    padding:10px 0 25px;
+}
+
+.trend{
+    min-width:250px;
+    height:330px;
+    position:relative;
+    border-radius:16px;
+    overflow:hidden;
+    cursor:pointer;
+    border:1px solid #30294a;
+}
+
+.trend img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.4s;
+}
+
+.trend:hover img{
+    transform:scale(1.1);
+}
+
+.trend-info{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    padding:30px 15px 15px;
+    background:linear-gradient(transparent,#050510);
+}
+
+/* =========================================================
+   QUIZ
+========================================================= */
+
+.quiz-box{
+    max-width:850px;
+    margin:auto;
+    background:#101024;
+    border:1px solid #382e55;
+    border-radius:20px;
+    padding:35px;
+    text-align:center;
+    box-shadow:0 0 50px #7c3aed22;
+}
+
+.quiz-progress{
+    height:7px;
+    background:#27213b;
+    border-radius:20px;
+    overflow:hidden;
+    margin:20px 0 30px;
+}
+
+.quiz-progress div{
+    height:100%;
+    width:0;
+    background:linear-gradient(90deg,#7c3aed,#ec4899);
+    transition:.4s;
+}
+
+.question{
+    font-size:30px;
+    margin-bottom:30px;
+}
+
+.answers{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.answer{
+    padding:20px;
+    border-radius:14px;
+    border:1px solid #393252;
+    background:#17172e;
+    color:#fff;
+    cursor:pointer;
+    font-size:16px;
+    transition:.2s;
+}
+
+.answer:hover{
+    background:#7c3aed;
+    transform:scale(1.02);
+}
+
+/* =========================================================
+   WHEEL
+========================================================= */
+
+.wheel-area{
+    text-align:center;
+    padding:30px;
+}
+
+#wheel{
+    width:330px;
+    height:330px;
+    margin:25px auto;
+    border-radius:50%;
+    border:12px solid #211a37;
+    background:conic-gradient(
+        #7c3aed 0 45deg,
+        #ec4899 45deg 90deg,
+        #06b6d4 90deg 135deg,
+        #22c55e 135deg 180deg,
+        #f59e0b 180deg 225deg,
+        #ef4444 225deg 270deg,
+        #6366f1 270deg 315deg,
+        #a855f7 315deg
+    );
+    box-shadow:0 0 50px #8b5cf666;
+    transition:transform 4s cubic-bezier(.15,.8,.2,1);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.wheel span{
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    background:#080810;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+/* =========================================================
+   PERSONALITY
+========================================================= */
+
+.personality{
+    background:
+        linear-gradient(135deg,#17122d,#101b2d);
+    border:1px solid #56328a;
+    border-radius:20px;
+    padding:40px;
+    text-align:center;
+}
+
+.personality-icon{
+    font-size:70px;
+}
+
+.personality h2{
+    font-size:40px;
+    margin:10px;
+    color:#c084fc;
+}
+
+/* =========================================================
+   ACHIEVEMENTS
+========================================================= */
+
+.achievements{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+}
+
+.badge{
+    background:#101024;
+    border:1px solid #31294a;
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+}
+
+.badge .emoji{
+    font-size:45px;
+}
+
+.badge.locked{
+    opacity:.35;
+    filter:grayscale(1);
+}
+
+/* =========================================================
+   RECOMMENDER
+========================================================= */
+
+.preference{
+    background:#101024;
+    border:1px solid #31294a;
+    padding:30px;
+    border-radius:20px;
+}
+
+.preference-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.preference label{
+    display:block;
+    color:#c8c2d9;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+.preference select{
+    width:100%;
+    background:#17172c;
+    color:#fff;
+    border:1px solid #393252;
+    padding:13px;
+    border-radius:10px;
+}
+
+.result{
+    display:none;
+    margin-top:25px;
+    background:#15102b;
+    border:1px solid #8b5cf6;
+    border-radius:20px;
+    padding:25px;
+}
+
+.result-content{
+    display:flex;
+    gap:25px;
+}
+
+.result img{
+    width:220px;
+    height:310px;
+    object-fit:cover;
+    border-radius:12px;
+}
+
+/* =========================================================
+   SEARCH PAGE
+========================================================= */
+
+.search-large{
+    width:100%;
+    background:#111124;
+    border:1px solid #3a3154;
+    padding:17px;
+    border-radius:12px;
+    color:#fff;
+    outline:0;
+    margin-bottom:25px;
+}
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about{
+    background:#101024;
+    border:1px solid #30284b;
+    border-radius:20px;
+    padding:35px;
+    line-height:1.8;
+}
+
+.about h2{
+    color:#c084fc;
+    margin:20px 0 8px;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:#000b;
+    backdrop-filter:blur(10px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:5000;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    max-width:600px;
+    width:100%;
+    background:#101024;
+    border:1px solid #7544a8;
+    border-radius:20px;
+    padding:30px;
+    position:relative;
+}
+
+.close{
+    position:absolute;
+    right:20px;
+    top:15px;
+    background:none;
+    border:0;
+    color:#fff;
+    font-size:25px;
+    cursor:pointer;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    margin-top:60px;
+    padding:50px 7%;
+    background:#030308;
+    border-top:1px solid #25203a;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:40px;
+}
+
+footer h2{
+    color:#c084fc;
+}
+
+footer h3{
+    margin-bottom:10px;
+}
+
+footer p,
+footer li{
+    color:#89849b;
+    line-height:1.8;
+}
+
+footer ul{
+    list-style:none;
+}
+
+.copyright{
+    text-align:center;
+    margin-top:30px;
+    padding-top:20px;
+    border-top:1px solid #25203a;
+    color:#666276;
+}
+
+/* =========================================================
+   LIGHT MODE
+========================================================= */
+
+body.light .navbar,
+body.light .card,
+body.light .stat,
+body.light .quiz-box,
+body.light .preference,
+body.light .badge,
+body.light .about,
+body.light .modal-box{
+    background:#fff;
+    color:#111;
+}
+
+body.light .nav button{
+    color:#444;
+}
+
+body.light .search,
+body.light .search-large,
+body.light .preference select{
+    background:#f2f3f8;
+    color:#111;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:900px){
+
+    .navbar{
+        flex-wrap:wrap;
+    }
+
+    .nav{
+        order:5;
+        width:100%;
+    }
+
+    .search{
+        width:180px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .preference-grid{
+        grid-template-columns:1fr;
+    }
+
+    .answers{
+        grid-template-columns:1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .hero{
+        padding:60px 6%;
+        min-height:550px;
+    }
+
+    .hero h1{
+        font-size:48px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+        margin-top:20px;
+    }
+
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .card img{
+        height:220px;
+    }
+
+    .result-content{
+        flex-direction:column;
+    }
+
+    .result img{
+        width:100%;
+        height:350px;
+    }
+
+    #wheel{
+        width:270px;
+        height:270px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- PARTICLES -->
+<div id="particles"></div>
+
+
+<!-- ========================================================
+     NAVIGATION
+========================================================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        🌸 Anime<span>Nest</span>
+    </div>
+
+    <div class="nav">
+
+        <button class="active"
+        onclick="page('home',this)">
+            🏠 Home
+        </button>
+
+        <button onclick="page('discover',this)">
+            🔥 Discover
+        </button>
+
+        <button onclick="page('quiz',this)">
+            🧠 Anime Quiz
+        </button>
+
+        <button onclick="page('wheel',this)">
+            🎰 Wheel
+        </button>
+
+        <button onclick="page('top',this)">
+            🏆 Top 100
+        </button>
+
+        <button onclick="page('watchlist',this)">
+            🔖 Watchlist
+        </button>
+
+        <button onclick="page('about',this)">
+            ℹ️ About
+        </button>
+
+    </div>
+
+    <div class="search">
+        🔍
+        <input
+            id="navSearch"
+            placeholder="Search..."
+            onkeyup="quickSearch()"
+        >
+    </div>
+
+    <button class="icon-btn" onclick="theme()">
+        🌙
+    </button>
+
+</nav>
+
+
+<!-- ========================================================
+     HOME
+========================================================= -->
+
+<section id="home" class="page active">
+
+    <div class="hero">
+
+        <div class="hero-content">
+
+            <div class="small-title">
+                ⚡ THE ULTIMATE ANIME DISCOVERY HUB
+            </div>
+
+            <h1>
+                Find Your
+                <span class="gradient">
+                    Next Obsession.
+                </span>
+            </h1>
+
+            <p>
+                Thousands of anime. Endless possibilities.
+                Tell AnimeNest what you love and discover
+                your next adventure.
+            </p>
+
+            <div class="hero-buttons">
+
+                <button class="btn primary"
+                onclick="page('quiz')">
+                    🧠 Take Anime Quiz
+                </button>
+
+                <button class="btn secondary"
+                onclick="page('wheel')">
+                    🎰 Spin the Wheel
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="stats">
+
+            <div class="stat">
+                <h2>500+</h2>
+                <p>Anime Discoveries</p>
+            </div>
+
+            <div class="stat">
+                <h2>25+</h2>
+                <p>Genres</p>
+            </div>
+
+            <div class="stat">
+                <h2>10K+</h2>
+                <p>Fans</p>
+            </div>
+
+            <div class="stat">
+                <h2>∞</h2>
+                <p>Possibilities</p>
+            </div>
+
+        </div>
+
+
+        <h2 class="title">
+            🔥 Trending <span>Now</span>
+        </h2>
+
+        <div id="trending" class="trending"></div>
+
+
+        <h2 class="title">
+            🎭 Explore <span>Genres</span>
+        </h2>
+
+        <div class="genre-list">
+
+            <button onclick="genre('All')">🌟 All</button>
+            <button onclick="genre('Action')">⚔️ Action</button>
+            <button onclick="genre('Adventure')">🗺️ Adventure</button>
+            <button onclick="genre('Comedy')">😂 Comedy</button>
+            <button onclick="genre('Fantasy')">🧙 Fantasy</button>
+            <button onclick="genre('Mystery')">🕵️ Mystery</button>
+            <button onclick="genre('Sports')">🏆 Sports</button>
+            <button onclick="genre('Romance')">❤️ Romance</button>
+            <button onclick="genre('Drama')">🎭 Drama</button>
+
+        </div>
+
+
+        <h2 class="title">
+            💎 Popular <span>Picks</span>
+        </h2>
+
+        <div id="homeGrid" class="grid"></div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================
+     DISCOVER
+========================================================= -->
+
+<section id="discover" class="page">
+
+    <div class="container">
+
+        <h1 class="title">
+            🔥 <span>Discover</span> Anime
+        </h1>
+
+        <input
+            id="bigSearch"
+            class="search-large"
+            placeholder="Search by anime name or genre..."
+            onkeyup="bigSearch()"
+        >
+
+        <div class="genre-list">
+
+            <button onclick="genre('All')">All</button>
+            <button onclick="genre('Action')">⚔️ Action</button>
+            <button onclick="genre('Adventure')">🗺️ Adventure</button>
+            <button onclick="genre('Comedy')">😂 Comedy</button>
+            <button onclick="genre('Fantasy')">🧙 Fantasy</button>
+            <button onclick="genre('Mystery')">🕵️ Mystery</button>
+            <button onclick="genre('Sports')">🏆 Sports</button>
+            <button onclick="genre('Drama')">🎭 Drama</button>
+
+        </div>
+
+        <div id="discoverGrid" class="grid"></div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================
+     QUIZ
+========================================================= -->
+
+<section id="quiz" class="page">
+
+    <div class="container">
+
+        <h1 class="title">
+            🧠 What's Your <span>Anime Personality?</span>
+        </h1>
+
+        <div class="quiz-box">
+
+            <div class="quiz-progress">
+                <div id="progress"></div>
+            </div>
+
+            <div id="quizContent"></div>
+
+        </div>
+
+        <div id="personalityResult"></div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================
+     WHEEL
+========================================================= -->
+
+<section id="wheel" class="page">
+
+    <div class="container">
+
+        <h1 class="title">
+            🎰 Spin the <span>Anime Wheel</span>
+        </h1>
+
+        <div class="wheel-area">
+
+            <p>
+                Can't decide what to watch?
+                Let fate choose for you.
+            </p>
+
+            <div id="wheel">
+                <span>ANIME<br>GO!</span>
+            </div>
+
+            <button
+                class="btn primary"
+                onclick="spinWheel()"
+            >
+                🎰 SPIN!
+            </button>
+
+            <h2
+                id="wheelResult"
+                style="margin-top:25px;color:#c084fc;"
+            ></h2>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================
+     TOP
+========================================================= -->
+
+<section id="top" class="page">
+
+    <div class="container">
+
+        <h1 class="title">
+            🏆 <span>Top Rated</span> Anime
+        </h1>
+
+        <div id="topGrid" class="grid"></div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================
+     WATCHLIST
+========================================================= -->
+
+<section id="watchlist" class="page">
+
+    <div class="container">
+
+        <h1 class="title">
+            🔖 My <span>Watchlist</span>
+        </h1>
+
+        <div id="watchGrid" class="grid"></div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================
+     ABOUT
+========================================================= -->
+
+<section id="about" class="page">
+
+    <div class="container">
+
+        <div class="about">
+
+            <h1>
+                🌸 Welcome to AnimeNest
+            </h1>
+
+            <h2>🎯 What is AnimeNest?</h2>
+
+            <p>
+                AnimeNest is an anime discovery website
+                designed to help you find anime based on
+                your interests, mood and personality.
+            </p>
+
+            <h2>🧠 Anime Quiz</h2>
+
+            <p>
+                Answer a few questions and AnimeNest
+                will calculate your anime personality.
+            </p>
+
+            <h2>🎰 Anime Wheel</h2>
+
+            <p>
+                Can't decide what to watch?
+                Spin the wheel and let randomness
+                choose your next anime.
+            </p>
+
+            <h2>🔖 Watchlist</h2>
+
+            <p>
+                Save anime that you want to watch later.
+                Your watchlist is stored in your browser.
+            </p>
+
+            <h2>💡 Beginner Friendly</h2>
+
+            <p>
+                AnimeNest is especially useful if you are
+                new to anime and don't know where to start.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================
+     MODAL
+========================================================= -->
+
+<div id="modal" class="modal">
+
+    <div class="modal-box">
+
+        <button class="close" onclick="closeModal()">
+            ×
+        </button>
+
+        <div id="modalContent"></div>
+
+    </div>
+
+</div>
+
+
+<!-- ========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <div class="footer-grid">
+
+        <div>
+
+            <h2>🌸 AnimeNest</h2>
+
+            <p>
+                Your next anime adventure starts here.
+                Discover. Explore. Watch.
+            </p>
+
+        </div>
+
+        <div>
+
+            <h3>Explore</h3>
+
+            <ul>
+                <li onclick="page('discover')">Discover</li>
+                <li onclick="page('quiz')">Anime Quiz</li>
+                <li onclick="page('wheel')">Anime Wheel</li>
+                <li onclick="page('top')">Top Rated</li>
+            </ul>
+
+        </div>
+
+        <div>
+
+            <h3>Community</h3>
+
+            <ul>
+                <li>⭐ Rate Anime</li>
+                <li>❤️ Favorites</li>
+                <li>🔖 Watchlist</li>
+                <li>🏆 Achievements</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="copyright">
+        © 2026 AnimeNest ⚡ Made for anime fans.
+    </div>
+
+</footer>
+
+
+<script>
+
+/* =========================================================
+   ANIME DATABASE
+========================================================= */
+
+const anime = [
+
+{
+name:"Demon Slayer",
+genres:["Action","Adventure","Fantasy"],
+rating:9.0,
+episodes:55,
+length:"Medium",
+image:"https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=700&q=80",
+description:"A young swordsman joins the Demon Slayer Corps and begins an incredible journey."
+},
+
+{
+name:"One Punch Man",
+genres:["Action","Comedy"],
+rating:8.7,
+episodes:24,
+length:"Short",
+image:"https://images.unsplash.com/photo-1560972550-aba3456b5564?auto=format&fit=crop&w=700&q=80",
+description:"A superhero who defeats enemies with one punch searches for a real challenge."
+},
+
+{
+name:"Haikyu!!",
+genres:["Sports","Drama"],
+rating:8.9,
+episodes:85,
+length:"Long",
+image:"https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=700&q=80",
+description:"A passionate volleyball player works with his team to reach the top."
+},
+
+{
+name:"Spy x Family",
+genres:["Comedy","Action"],
+rating:8.8,
+episodes:37,
+length:"Medium",
+image:"https://images.unsplash.com/photo-1531259683007-016a7b628fc3?auto=format&fit=crop&w=700&q=80",
+description:"A spy, an assassin and a telepath accidentally become a very unusual family."
+},
+
+{
+name:"Death Note",
+genres:["Mystery","Drama"],
+rating:9.0,
+episodes:37,
+length:"Medium",
+image:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=700&q=80",
+description:"A mysterious notebook begins a dangerous battle of intelligence."
+},
+
+{
+name:"Naruto",
+genres:["Action","Adventure"],
+rating:8.4,
+episodes:220,
+length:"Long",
+image:"https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=700&q=80",
+description:"A young ninja dreams of becoming the leader of his village."
+},
+
+{
+name:"Attack on Titan",
+genres:["Action","Drama","Mystery"],
+rating:9.1,
+episodes:87,
+length:"Long",
+image:"https://images.unsplash.com/photo-1541560052-77ec1bbc09f7?auto=format&fit=crop&w=700&q=80",
+description:"Humanity fights for survival while uncovering shocking secrets."
+},
+
+{
+name:"My Hero Academia",
+genres:["Action","Fantasy"],
+rating:8.5,
+episodes:150,
+length:"Long",
+image:"https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?auto=format&fit=crop&w=700&q=80",
+description:"A student without powers enters a school for superheroes."
+},
+
+{
+name:"Dr. Stone",
+genres:["Adventure","Fantasy"],
+rating:8.6,
+episodes:70,
+length:"Long",
+image:"https://images.unsplash.com/photo-1534791547706-7d2b4d2b4e4e?auto=format&fit=crop&w=700&q=80",
+description:"A genius attempts to rebuild civilization after humanity is turned to stone."
+},
+
+{
+name:"Your Name",
+genres:["Romance","Drama","Fantasy"],
+rating:8.8,
+episodes:1,
+length:"Short",
+image:"https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=700&q=80",
+description:"Two teenagers mysteriously begin experiencing each other's lives."
+},
+
+{
+name:"Pokémon",
+genres:["Adventure","Fantasy"],
+rating:8.0,
+episodes:1000,
+length:"Long",
+image:"https://images.unsplash.com/photo-1613771404721-1f92d799e49f?auto=format&fit=crop&w=700&q=80",
+description:"Young trainers travel the world while training Pokémon and making friends."
+},
+
+{
+name:"Kuroko's Basketball",
+genres:["Sports","Drama"],
+rating:8.5,
+episodes:75,
+length:"Long",
+image:"https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=700&q=80",
+description:"A mysterious basketball player joins a new team and challenges powerful rivals."
+},
+
+{
+name:"Jujutsu Kaisen",
+genres:["Action","Fantasy"],
+rating:8.8,
+episodes:47,
+length:"Medium",
+image:"https://images.unsplash.com/photo-1607604276583-eef5b076f64a?auto=format&fit=crop&w=700&q=80",
+description:"A student enters a world of supernatural curses and powerful sorcerers."
+},
+
+{
+name:"Frieren",
+genres:["Fantasy","Adventure"],
+rating:9.1,
+episodes:28,
+length:"Medium",
+image:"https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?auto=format&fit=crop&w=700&q=80",
+description:"An elf mage travels through a changing world long after an adventure has ended."
+},
+
+{
+name:"Blue Lock",
+genres:["Sports","Action"],
+rating:8.5,
+episodes:38,
+length:"Medium",
+image:"https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=700&q=80",
+description:"Young football players compete in an intense program designed to create the ultimate striker."
+}
+
+];
+
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+for(let i=0;i<80;i++){
+
+    const p=document.createElement("div");
+
+    p.className="particle";
+
+    p.style.left=Math.random()*100+"%";
+
+    p.style.animationDelay=
+        Math.random()*8+"s";
+
+    p.style.animationDuration=
+        (5+Math.random()*8)+"s";
+
+    document.getElementById("particles")
+        .appendChild(p);
+}
+
+
+/* =========================================================
+   PAGE SWITCHING
+========================================================= */
+
+function page(id,btn){
+
+    document.querySelectorAll(".page")
+        .forEach(p=>p.classList.remove("active"));
+
+    document.getElementById(id)
+        .classList.add("active");
+
+    document.querySelectorAll(".nav button")
+        .forEach(b=>b.classList.remove("active"));
+
+    if(btn) btn.classList.add("active");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+    if(id==="discover") renderDiscover();
+    if(id==="top") renderTop();
+    if(id==="watchlist") renderWatchlist();
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+function card(a){
+
+    return `
+    <div class="card">
+
+        <img src="${a.image}" alt="${a.name}">
+
+        <div class="card-body">
+
+            <h3>${a.name}</h3>
+
+            <div class="rating">
+                ⭐ ${a.rating}/10
+            </div>
+
+            <div class="meta">
+                📺 ${a.episodes} episodes
+                • ${a.length}
+            </div>
+
+            <div class="tags">
+
+                ${a.genres.map(g=>
+                    `<span class="tag">${g}</span>`
+                ).join("")}
+
+            </div>
+
+            <div class="card-buttons">
+
+                <button onclick="details('${a.name}')">
+                    👁️ View
+                </button>
+
+                <button onclick="add('${a.name}')">
+                    🔖 Save
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    `;
+}
+
+
+/* =========================================================
+   HOME
+========================================================= */
+
+function renderHome(){
+
+    document.getElementById("homeGrid")
+        .innerHTML=
+        anime.slice(0,8).map(card).join("");
+
+    document.getElementById("trending")
+        .innerHTML=
+        anime.slice(0,6).map(a=>`
+
+            <div class="trend"
+                 onclick="details('${a.name}')">
+
+                <img src="${a.image}">
+
+                <div class="trend-info">
+
+                    <h2>${a.name}</h2>
+
+                    <div class="rating">
+                        ⭐ ${a.rating}
+                    </div>
+
+                </div>
+
+            </div>
+
+        `).join("");
+}
+
+
+/* =========================================================
+   DISCOVER
+========================================================= */
+
+function renderDiscover(list=anime){
+
+    document.getElementById("discoverGrid")
+        .innerHTML=list.map(card).join("");
+
+}
+
+
+/* =========================================================
+   GENRE
+========================================================= */
+
+function genre(g){
+
+    if(g==="All"){
+        renderDiscover(anime);
+    }
+    else{
+
+        renderDiscover(
+            anime.filter(a=>
+                a.genres.includes(g)
+            )
+        );
+
+    }
+
+    page("discover");
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function bigSearch(){
+
+    const q=
+        document.getElementById("bigSearch")
+        .value.toLowerCase();
+
+    renderDiscover(
+
+        anime.filter(a=>
+            a.name.toLowerCase().includes(q) ||
+            a.genres.some(g=>
+                g.toLowerCase().includes(q)
+            )
+        )
+
+    );
+
+}
+
+
+function quickSearch(){
+
+    const q=
+        document.getElementById("navSearch")
+        .value.toLowerCase();
+
+    if(q.length===0) return;
+
+    page("discover");
+
+    renderDiscover(
+
+        anime.filter(a=>
+            a.name.toLowerCase().includes(q) ||
+            a.genres.some(g=>
+                g.toLowerCase().includes(q)
+            )
+        )
+
+    );
+
+}
+
+
+/* =========================================================
+   TOP
+========================================================= */
+
+function renderTop(){
+
+    const sorted=
+        [...anime].sort(
+            (a,b)=>b.rating-a.rating
+        );
+
+    document.getElementById("topGrid")
+        .innerHTML=
+        sorted.map(card).join("");
+
+}
+
+
+/* =========================================================
+   WATCHLIST
+========================================================= */
+
+let watchlist=
+    JSON.parse(
+        localStorage.getItem("watchlist") || "[]"
+    );
+
+
+function add(name){
+
+    if(!watchlist.includes(name)){
+
+        watchlist.push(name);
+
+        localStorage.setItem(
+            "watchlist",
+            JSON.stringify(watchlist)
+        );
+
+        alert("⭐ "+name+" added to Watchlist!");
+
+    }
+    else{
+
+        alert("Already in your Watchlist!");
+
+    }
+
+}
+
+
+function renderWatchlist(){
+
+    const saved=
+        anime.filter(a=>
+            watchlist.includes(a.name)
+        );
+
+    document.getElementById("watchGrid")
+        .innerHTML=
+
+        saved.length
+        ? saved.map(card).join("")
+        : `
+            <div class="about">
+                <h2>🔖 Your Watchlist is Empty</h2>
+                <p>
+                    Explore AnimeNest and save
+                    anime you want to watch.
+                </p>
+            </div>
+        `;
+
+}
+
+
+/* =========================================================
+   DETAILS MODAL
+========================================================= */
+
+function details(name){
+
+    const a=
+        anime.find(x=>x.name===name);
+
+    document.getElementById("modalContent")
+        .innerHTML=`
+
+        <img
+            src="${a.image}"
+            style="width:180px;height:250px;
+                   object-fit:cover;border-radius:12px"
+        >
+
+        <h1 style="margin-top:20px">
+            ${a.name}
+        </h1>
+
+        <div class="rating">
+            ⭐ ${a.rating}/10
+        </div>
+
+        <p style="color:#aaa;line-height:1.7;margin:15px 0">
+            ${a.description}
+        </p>
+
+        <p>
+            📺 Episodes: ${a.episodes}
+        </p>
+
+        <p>
+            🎭 Genres: ${a.genres.join(", ")}
+        </p>
+
+        <button
+            class="btn primary"
+            style="margin-top:20px"
+            onclick="add('${a.name}');closeModal()"
+        >
+            🔖 Add to Watchlist
+        </button>
+
+        `;
+
+    document.getElementById("modal")
+        .classList.add("show");
+
+}
+
+
+function closeModal(){
+
+    document.getElementById("modal")
+        .classList.remove("show");
+
+}
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+function theme(){
+
+    document.body.classList.toggle("light");
+
+    localStorage.setItem(
+        "theme",
+        document.body.classList.contains("light")
+        ? "light"
+        : "dark"
+    );
+
+}
+
+if(
+    localStorage.getItem("theme")==="light"
+){
+    document.body.classList.add("light");
+}
+
+
+/* =========================================================
+   QUIZ
+========================================================= */
+
+const questions=[
+
+{
+q:"🔥 What sounds most exciting?",
+a:[
+["⚔️ Epic battles","action"],
+["😂 Absolute chaos","comedy"],
+["🧠 Mind games","smart"],
+["❤️ Emotional story","emotional"]
+]
+},
+
+{
+q:"🌎 Choose your adventure.",
+a:[
+["🏰 Fantasy world","fantasy"],
+["🏙️ Modern city","modern"],
+["🏆 Sports arena","sports"],
+["🚀 Something futuristic","scifi"]
+]
+},
+
+{
+q:"😎 Pick your character.",
+a:[
+["🔥 The fearless hero","hero"],
+["🧠 The genius","smart"],
+["😂 The funny one","comedy"],
+["🌑 The mysterious one","mystery"]
+]
+},
+
+{
+q:"⏱️ How long do you want your anime to be?",
+a:[
+["⚡ Short","short"],
+["📺 Medium","medium"],
+["♾️ Give me a huge adventure","long"],
+["🎬 Just one amazing movie","movie"]
+]
+},
+
+{
+q:"🎵 What's your mood?",
+a:[
+["🔥 HYPE!","action"],
+["😂 Make me laugh","comedy"],
+["😭 Make me emotional","emotional"],
+["🧠 Make me think","smart"]
+]
+}
+
+];
+
+let question=0;
+let answers=[];
+
+
+function startQuiz(){
+
+    question=0;
+    answers=[];
+    showQuestion();
+
+}
+
+
+function showQuestion(){
+
+    const q=questions[question];
+
+    document.getElementById("progress")
+        .style.width=
+        ((question)/questions.length*100)+"%";
+
+    document.getElementById("quizContent")
+        .innerHTML=`
+
+        <h2 class="question">
+            ${q.q}
+        </h2>
+
+        <div class="answers">
+
+            ${q.a.map((x,i)=>`
+
+                <button
+                    class="answer"
+                    onclick="answer('${x[1]}')"
+                >
+                    ${x[0]}
+                </button>
+
+            `).join("")}
+
+        </div>
+
+        <p style="margin-top:20px;color:#777">
+            Question ${question+1}
+            of ${questions.length}
+        </p>
+        `;
+
+}
+
+
+function answer(value){
+
+    answers.push(value);
+
+    question++;
+
+    if(question<questions.length){
+
+        showQuestion();
+
+    }
+    else{
+
+        finishQuiz();
+
+    }
+
+}
+
+
+function finishQuiz(){
+
+    const count={};
+
+    answers.forEach(x=>{
+        count[x]=(count[x]||0)+1;
+    });
+
+    const winner=
+        Object.keys(count).sort(
+            (a,b)=>count[b]-count[a]
+        )[0];
+
+
+    const personalities={
+
+        action:[
+            "⚔️",
+            "THE WARRIOR",
+            "You live for epic battles, impossible challenges and powerful heroes!"
+        ],
+
+        comedy:[
+            "😂",
+            "THE CHAOS MASTER",
+            "You want fun, ridiculous situations and characters that make you laugh!"
+        ],
+
+        smart:[
+            "🧠",
+            "THE STRATEGIST",
+            "You love clever characters, mysteries and mind games."
+        ],
+
+        emotional:[
+            "💖",
+            "THE HEART",
+            "You enjoy powerful stories that stay with you long after the episode ends."
+        ],
+
+        fantasy:[
+            "🧙",
+            "THE EXPLORER",
+            "You belong in magical worlds filled with incredible adventures."
+        ],
+
+        sports:[
+            "🏆",
+            "THE COMPETITOR",
+            "You love teamwork, rivalries and the thrill of victory."
+        ],
+
+        mystery:[
+            "🌑",
+            "THE DETECTIVE",
+            "You enjoy secrets, twists and stories that make you think."
+        ]
+
+    };
+
+
+    const p=
+        personalities[winner] ||
+        personalities.action;
+
+
+    document.getElementById("personalityResult")
+        .innerHTML=`
+
+        <div class="personality">
+
+            <div class="personality-icon">
+                ${p[0]}
+            </div>
+
+            <h2>
+                ${p[1]}
+            </h2>
+
+            <p>
+                ${p[2]}
+            </p>
+
+            <br>
+
+            <h3>
+                🎯 Your Anime Match
+            </h3>
+
+            <br>
+
+            <button
+                class="btn primary"
+                onclick="smartRecommendation('${winner}')"
+            >
+                ✨ Show My Anime
+            </button>
+
+        </div>
+
+        `;
+
+}
+
+
+/* =========================================================
+   SMART RECOMMENDATION
+========================================================= */
+
+function smartRecommendation(type){
+
+    let list=anime;
+
+    if(type==="action")
+        list=anime.filter(a=>a.genres.includes("Action"));
+
+    if(type==="comedy")
+        list=anime.filter(a=>a.genres.includes("Comedy"));
+
+    if(type==="sports")
+        list=anime.filter(a=>a.genres.includes("Sports"));
+
+    if(type==="fantasy")
+        list=anime.filter(a=>a.genres.includes("Fantasy"));
+
+    if(type==="mystery")
+        list=anime.filter(a=>a.genres.includes("Mystery"));
+
+    const result=
+        list[Math.floor(Math.random()*list.length)];
+
+    details(result.name);
+
+}
+
+
+/* =========================================================
+   WHEEL
+========================================================= */
+
+let rotation=0;
+
+function spinWheel(){
+
+    const wheel=
+        document.getElementById("wheel");
+
+    const random=
+        Math.floor(Math.random()*anime.length);
+
+    rotation+=
+        1440+
+        Math.floor(Math.random()*360);
+
+    wheel.style.transform=
+        `rotate(${rotation}deg)`;
+
+    setTimeout(()=>{
+
+        const winner=anime[random];
+
+        document.getElementById("wheelResult")
+            .innerHTML=
+            `🎉 You should watch <b>${winner.name}</b>!`;
+
+        details(winner.name);
+
+    },4000);
+
+}
+
+
+/* =========================================================
+   START QUIZ WHEN PAGE OPENS
+========================================================= */
+
+startQuiz();
+
+
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+renderHome();
+
+renderDiscover();
+
+renderTop();
+
+renderWatchlist();
+
+</script>
+
+</body>
+</html>
